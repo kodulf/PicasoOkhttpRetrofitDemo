@@ -13,8 +13,18 @@ public class Item
     private String content;
     private String image;
 
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    private long userId;
     public Item() {
     }
+
 
     @Override
     public String toString() {
@@ -30,9 +40,12 @@ public class Item
         if(!object.isNull("user")) {//因为有的是匿名发布的
             userIcon = object.getJSONObject("user").getString("icon");
             userName = object.getJSONObject("user").getString("login");
-            image =object.getString("image");
-            content =object.getString("content");
+            userId= object.getJSONObject("user").getLong("id");
         }
+        if(!object.isNull("image")) {
+            image = object.getString("image");
+        }
+        content =object.getString("content");
     }
 
     public String getUserIcon() {
